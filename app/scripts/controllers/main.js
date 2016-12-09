@@ -2,10 +2,20 @@
 
 
 angular.module('classifyApp')
-  .controller('MainCtrl', function($scope, FileUploader) {
+  .controller('MainCtrl', function($scope, UploadService, FileUploader) {
+
+    $scope.upload = function(newFile) {
+
+      UploadService.upload(newFile).then(function(res) {
+        // DO SOMETHING WITH THE RESULT!
+        console.log('result', res);
+      });
+
+    };
 
     var uploader = new FileUploader({
-      url: 'api/classify_upload'
+      url: 'api/classify_upload',
+      queueLimit: 1
     });
 
     $scope.uploader = uploader;

@@ -1,27 +1,33 @@
 <div class="container">
-    <h2>Select a file</h2>
+    <h2 class="text-center">Select a image to classify</h2>
     <div class="container">
-        <form id="formupload" class="form-inline" role="form" action="api/classify_upload" method="post" enctype="multipart/form-data">
-            <div class="form-group">
-                <!-- <label for="formGroupExampleInput">Select a image</label> -->
-                <input type="file" name="imagefile" nv-file-select uploader="uploader" />
+        <div ng-show="uploader.queue[0]==undefined" class="row" class="text-center">
+            <div class="col-md-12">
+                <input type="file" fileinput="file" filepreview="filepreview" nv-file-select uploader="uploader" />
             </div>
-        </form>
-        <button ng-click="uploader.clearQueue()">Clear</button>
-        <br/>
-        <ul>
-            <li ng-repeat="item in uploader.queue">
-                <span ng-bind="item.file.name"></span>
-                <br/>
-                <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 300 }"></div>
-                <div ng-show="uploader.isHTML5 && item.progress">
-                    <div class="progress" style="margin-bottom: 0;">
-                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+        </div>
+        <div class="row">
+            <div ng-show="uploader.queue[0]" class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <button type="button" class="btn btn-default pull-left" ng-click="uploader.queue[0].upload()">Submit</button>
+                            <button type="button" class="btn btn-danger pull-right" ng-click="uploader.queue[0].remove()">Cancel</button>
+                        </div>
                     </div>
                 </div>
-                <p><a class="btn btn-lg btn-success" ng-click="item.upload()">Submit</a></p>
-                <p ng-show="item.response">This one is <span><h3>{{item.response[0].label}}<h3></span></p>
-            </li>
-        </ul>
+                <div>
+                    <p ng-show="uploader.queue[0].response" class="text-center">This one is <span>{{uploader.queue[0].response[0].label}}</span> with a score of <span>{{uploader.queue[0].response[0].score * 100}}</span></p>
+                </div>
+                <div class="col-md-12">
+                    <div ng-show="uploader.isHTML5 && uploader.queue[0].progress">
+                        <div class="progress" style="margin-bottom: 0;">
+                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.queue[0].progress + '%' }"></div>
+                        </div>
+                    </div>
+                    <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview" />
+                </div>
+            </div>
+        </div>
     </div>
 </div>

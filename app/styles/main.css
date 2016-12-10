@@ -41,6 +41,9 @@ body {
   margin: 30px 0;
 }
 
+.no-border {
+  border: none;
+}
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;

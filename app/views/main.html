@@ -1,34 +1,42 @@
-<div class="container">
+<navigation></navigation>
+<div class="navbar-offset">
+  <div class="container">
+    <div class="alert alert-danger" ng-show="error!=undefined">
+      <button type="button" class="close" ng-click="error=undefined"><span>&times;</span>
+      </button>
+      {{error}}
+    </div>
     <h2 ng-show="uploader.queue[0]==undefined" class="text-center">Select a image to classify</h2>
     <h2 ng-show="uploader.queue[0]!=undefined" class="text-center">Classify image</h2>
     <div class="container">
-        <div ng-show="uploader.queue[0]==undefined" class="row" class="text-center">
-            <div class="col-md-12">
-                <input type="file" fileinput="file" filepreview="filepreview" nv-file-select uploader="uploader" />
-            </div>
+      <div ng-show="uploader.queue[0]==undefined" class="row" class="text-center">
+        <div class="col-md-12">
+          <input type="file" fileinput="file" filepreview="filepreview" nv-file-select uploader="uploader" />
         </div>
-        <div class="row">
-            <div ng-show="uploader.queue[0]" class="col-md-12">
-                <div class="panel panel-default no-border">
-                    <div class="panel-body">
-                        <div class="form-group">
-                            <button type="button" class="btn btn-default pull-left" ng-click="uploader.queue[0].upload()">Submit</button>
-                            <button type="button" class="btn btn-danger pull-right" ng-click="uploader.queue[0].remove()">Cancel</button>
-                        </div>
-                    </div>
-                </div>
-                <div>
-                    <p ng-show="uploader.queue[0].response" class="text-center"><strong>{{uploader.queue[0].response[0].label}}</strong> with a score of <strong>{{uploader.queue[0].response[0].score * 100 | number:2}} </strong> %</p>
-                </div>
-                <div class="col-md-12">
-                    <div ng-show="uploader.isHTML5 && uploader.queue[0].progress">
-                        <div class="progress" style="margin-bottom: 0;">
-                            <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.queue[0].progress + '%' }"></div>
-                        </div>
-                    </div>
-                    <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview" />
-                </div>
+      </div>
+      <div class="row">
+        <div ng-show="uploader.queue[0]" class="col-md-12">
+          <div class="panel panel-default no-border">
+            <div class="panel-body">
+              <div class="form-group">
+                <button type="button" class="btn btn-default pull-left" ng-click="uploader.queue[0].upload()">Submit</button>
+                <button type="button" class="btn btn-danger pull-right" ng-click="uploader.queue[0].remove()">Cancel</button>
+              </div>
             </div>
+          </div>
+          <div>
+            <p ng-show="uploader.queue[0].response" class="text-center"><strong>{{uploader.queue[0].response[0].label}}</strong> with a score of <strong>{{uploader.queue[0].response[0].score * 100 | number:2}} </strong> %</p>
+          </div>
+          <div class="col-md-12">
+            <div ng-show="uploader.isHTML5 && uploader.queue[0].progress">
+              <div class="progress" style="margin-bottom: 0;">
+                <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.queue[0].progress + '%' }"></div>
+              </div>
+            </div>
+            <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview" />
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </div>

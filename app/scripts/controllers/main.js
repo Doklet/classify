@@ -1,6 +1,5 @@
 'use strict';
 
-
 angular.module('classifyApp')
   .controller('MainCtrl', function($scope, UploadService, FileUploader) {
 
@@ -22,12 +21,18 @@ angular.module('classifyApp')
 
     uploader.onBeforeUploadItem = function(item) {
       item.response = undefined;
+      $scope.error = undefined;
       console.info('onBeforeUploadItem', item);
     };
 
     uploader.onSuccessItem = function(fileItem, response, status, headers) {
       fileItem.response = response;
       console.info('onSuccessItem', fileItem, response, status, headers);
+    };
+
+    uploader.onErrorItem = function(fileItem, response, status, headers) {
+      $scope.error = response;
+      console.info('onErrorItem', fileItem, response, status, headers);
     };
 
     uploader.onCompleteItem = function(fileItem, response, status, headers) {

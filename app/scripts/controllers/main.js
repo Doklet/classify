@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('classifyApp')
-  .controller('MainCtrl', function($scope, UploadService, FileUploader) {
+  .controller('MainCtrl', function($scope, Client, UploadService, FileUploader) {
 
     $scope.upload = function(newFile) {
 

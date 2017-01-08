@@ -7,13 +7,18 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
-module.exports = function (grunt) {
+module.exports = function(grunt) {
 
   // Load grunt tasks automatically
   require('load-grunt-tasks')(grunt);
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+
+  // Setup the proxy
+  grunt.loadNpmTasks('grunt-connect-proxy');
+
+  var proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest;
 
   // Configurable paths for the application
   var appConfig = {
@@ -68,20 +73,29 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
+      // Proxy the api calls to service's
+      proxies: [{
+        context: '/api',
+        host: 'localhost',
+        port: 5000,
+        https: false,
+        xforward: false
+      }],
       livereload: {
         options: {
           open: true,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static('.tmp'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
               ),
-              connect.static(appConfig.app)
+              connect.static(appConfig.app),
+              proxySnippet
             ];
           }
         }
@@ -89,7 +103,7 @@ module.exports = function (grunt) {
       test: {
         options: {
           port: 9001,
-          middleware: function (connect) {
+          middleware: function(connect) {
             return [
               connect.static('.tmp'),
               connect.static('test'),
@@ -164,7 +178,7 @@ module.exports = function (grunt) {
     wiredep: {
       app: {
         src: ['<%= yeoman.app %>/index.html'],
-        ignorePath:  /\.\.\//
+        ignorePath: /\.\.\//
       }
     },
 
@@ -204,7 +218,7 @@ module.exports = function (grunt) {
       html: ['<%= yeoman.dist %>/{,*/}*.html'],
       css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>','<%= yeoman.dist %>/images']
+        assetsDirs: ['<%= yeoman.dist %>', '<%= yeoman.dist %>/images']
       }
     },
 
@@ -355,7 +369,7 @@ module.exports = function (grunt) {
   });
 
 
-  grunt.registerTask('serve', 'Compile then start a connect web server', function (target) {
+  grunt.registerTask('serve', 'Compile then start a connect web server', function(target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
     }
@@ -365,12 +379,13 @@ module.exports = function (grunt) {
       'wiredep',
       'concurrent:server',
       'autoprefixer',
+      'configureProxies',
       'connect:livereload',
       'watch'
     ]);
   });
 
-  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function (target) {
+  grunt.registerTask('server', 'DEPRECATED TASK. Use the "serve" task instead', function(target) {
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
     grunt.task.run(['serve:' + target]);
   });

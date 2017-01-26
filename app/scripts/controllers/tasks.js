@@ -1,17 +1,20 @@
 'use strict';
 
-/**
- * @ngdoc function
- * @name classifyApp.controller:TasksCtrl
- * @description
- * # TasksCtrl
- * Controller of the classifyApp
- */
 angular.module('classifyApp')
-  .controller('TasksCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('TasksCtrl', function($scope) {
+
+    $scope.tasks = [{
+      id: '0',
+      name: 'Sort apples',
+      description: 'Sort bad from good apples',
+      text: 'Time to sort some apples',
+      updated: '15:28'
+    }, {
+      id: '1',
+      name: 'Register new purchase',
+      description: 'Register a new purchase ',
+      text: 'Lets register some customers ',
+      updated: '13:18'
+    }];
+
   });

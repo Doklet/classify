@@ -18,6 +18,7 @@ angular.module('classifyApp')
     function upload(uploadFile) {
       var upl = $http({
         method: 'POST',
+        // url: '/api/classify_upload', // /api/upload
         url: '/api/classify_upload', // /api/upload
         //IMPORTANT!!! You might think this should be set to 'multipart/form-data' 
         // but this is not true because when we are sending up files the request 

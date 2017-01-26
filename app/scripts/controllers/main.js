@@ -13,7 +13,7 @@ angular.module('classifyApp')
     };
 
     var uploader = new FileUploader({
-      url: 'api/classify_upload',
+      url: 'api/classify_upload/resnet50',
       queueLimit: 1
     });
 

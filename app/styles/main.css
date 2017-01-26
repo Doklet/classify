@@ -49,6 +49,13 @@ body {
 .no-border {
   border: none;
 }
+
+.no-padding {
+  padding-left: 0;
+  padding-top: 0;
+  padding-right: 0;
+}
+
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;

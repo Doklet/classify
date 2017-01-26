@@ -6,7 +6,7 @@
       </button>
       {{error}}
     </div>
-    <h2 ng-show="uploader.queue[0]==undefined" class="text-center">Upload a image</h2>
+    <h2 ng-show="uploader.queue[0]==undefined" class="text-center">Time to sort some apples!</h2>
     <div class="container">
       <div class="row">
         <div ng-show="uploader.queue[0]">
@@ -20,6 +20,19 @@
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" ng-repeat="event in events">
+      <div ng-if="event.bot!==undefined" class="talk-bubble round border bot-color-white">
+        <div class="talktext">
+          <p>{{event.text}}</p>
+        </div>
+      </div>
+      <div ng-if="event.user!==undefined" class="talk-bubble round pull-right user-color-cyan">
+        <div class="talktext">
+          <p></p>
+          <p>{{event.text}}</p>
         </div>
       </div>
     </div>

@@ -40,6 +40,10 @@ angular
         templateUrl: 'views/task.html',
         controller: 'TaskCtrl'
       })
+      .when('/dataset', {
+        templateUrl: 'views/dataset.html',
+        controller: 'DatasetCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

@@ -1,0 +1,34 @@
+<navigation></navigation>
+<div class="navbar-offset">
+  <div class="container">
+    <div class="page-header none-border-bottom">
+      <div class="container">
+        <div class="col-md-offset-2 col-md-8">
+          <h4>Models <span class="label label-info">{{models.length}}</span>
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <br>
+    </div>
+    <div class="row">
+      <div class="col-md-offset-2 col-md-8">
+        <div class="table-responsive">
+          <table class="table table-hover">
+            <tr ng-repeat="model in models | orderBy:'name'">
+              <td>
+                <dl>
+                  <dt><a ng-href="/#/?model={{model.id}}">{{model.name}}</a></dt>
+                  <dd>{{model.description}}</dd>
+                </dl>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

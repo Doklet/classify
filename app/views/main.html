@@ -6,15 +6,15 @@
       </button>
       {{error}}
     </div>
-    <h2 ng-show="uploader.queue[0]==undefined" class="text-center">Upload a image</h2>
+    <h2 ng-show="uploader.queue[0]==undefined" class="text-center">Howdy!</h2>
     <div class="container">
       <div class="row">
         <div ng-show="uploader.queue[0]">
-          <div class="col-xs-6 col-md-6 pull-right">
-            <div class="thumbnail pull-right no-padding">
+          <div class="col-md-6 col-md-offset-3">
+            <div class="thumbnail no-padding">
               <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview" />
               <div ng-show="uploader.queue[0].response" class="caption">
-                <p ng-repeat="l in uploader.queue[0].response">
+                <p class="classify-label" ng-repeat="l in uploader.queue[0].response">
                   <strong>{{l.label}}</strong> with a score of <strong>{{l.score * 100 | number:2}} </strong> %
                 </p>
               </div>

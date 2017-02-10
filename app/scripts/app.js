@@ -44,6 +44,10 @@ angular
         templateUrl: 'views/dataset.html',
         controller: 'DatasetCtrl'
       })
+      .when('/models', {
+        templateUrl: 'views/models.html',
+        controller: 'ModelsCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

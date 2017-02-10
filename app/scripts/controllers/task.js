@@ -5,30 +5,9 @@ angular.module('classifyApp')
 
     $scope.events = [];
 
-    // $scope.events = [{
-    //   id: '0',
-    //   user: {
-    //     id: '0',
-    //     username: 'Adam',
-    //     firstName: 'Adam',
-    //     lastname: 'Bengtsson'
-    //   },
-    //   created: '15:28',
-    //   text: 'Hi'
-    // }, {
-    //   id: '1',
-    //   user: {
-    //     id: '0',
-    //     username: 'Bot',
-    //     firstName: 'Bot',
-    //     lastname: 'Botterson'
-    //   },
-    //   created: '15:31',
-    //   text: 'Hi how are you'
-    // }];
-
     var uploader = new FileUploader({
       url: 'api/classify_upload/resnet50',
+      //url: 'api/classify_upload',
       queueLimit: 1
     });
 
@@ -43,6 +22,26 @@ angular.module('classifyApp')
 
     };
 
+    $scope.processCommand = function(cmd) {
+
+      var txt = cmd;
+
+      var msg = {
+        id: '0',
+        user: {
+          id: '0',
+          username: 'Adam',
+          firstName: 'Adam',
+          lastname: 'Johansson'
+        },
+        created: '15:28',
+        text: txt
+      };
+
+      $scope.events.push(msg);
+      $scope.command = undefined;
+    };
+
     $scope.performAction = function(action) {
 
       var msg = {
@@ -51,10 +50,14 @@ angular.module('classifyApp')
           id: '0',
           username: 'Adam',
           firstName: 'Adam',
-          lastname: 'Bengtsson'
+          lastname: 'Johansson'
         },
         created: '15:28',
-        text: action
+        text: action,
+        links: [{
+          name: 'Google',
+          url: 'http://www.google.com'
+        }]
       };
 
       $scope.events.push(msg);
@@ -91,16 +94,23 @@ angular.module('classifyApp')
     uploader.onSuccessItem = function(fileItem, response, status, headers) {
       fileItem.response = response;
       console.info('onSuccessItem', fileItem, response, status, headers);
+
+      var image = {
+        id: '0',
+        bot: {
+          name: 'MyBot'
+        },
+        created: '15:28',
+        image: fileItem,
+        response: response
+      };
+
+      $scope.events.push(image);
     };
 
     uploader.onErrorItem = function(fileItem, response, status, headers) {
       $scope.error = response;
       console.info('onErrorItem', fileItem, response, status, headers);
-    };
-
-    uploader.onCompleteItem = function(fileItem, response, status, headers) {
-      fileItem.progress = undefined;
-      console.info('onCompleteItem', fileItem, response, status, headers);
 
       var msg = {
         id: '0',
@@ -108,10 +118,15 @@ angular.module('classifyApp')
           name: 'MyBot'
         },
         created: '15:28',
-        text: 'There you go, classification completed'
+        text: 'Oops, classification failed'
       };
 
       $scope.events.push(msg);
+    };
+
+    uploader.onCompleteItem = function(fileItem, response, status, headers) {
+      fileItem.progress = undefined;
+      console.info('onCompleteItem', fileItem, response, status, headers);
     };
 
   });

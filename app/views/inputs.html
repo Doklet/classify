@@ -1,24 +1,47 @@
 <nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
   <div class="container-fluid container">
-    <form class="navbar-form no-border">
+    <form class="navbar-form form-inline no-border">
       <!-- STATUS_TYPE.AWAIT_UPLOAD -->
-      <label ng-show="uploader.queue[0]==undefined" class="btn btn-default btn-file">
-        Browse
-        <input type="file" style="display: none;" fileinput="file" filepreview="filepreview" nv-file-select uploader="uploader" />
-      </label>
+      <div ng-show="uploader.queue[0]==undefined">
+        <!--         <div class="form-group">
+          <input type="text" class="form-control" ng-model="command" ng-keypress="($event.charCode==13)? processCommand(command) : return">
+        </div> -->
+        <div class="container">
+          <div class="row">
+            <div class="col-md-offset-5 col-md-6 col-lg-offset-5 col-lg-6">
+              <div class="form-group">
+                <label class="btn btn-danger btn-file">
+                  <span class='glyphicon glyphicon-camera'></span>
+                  <input type="file" style="display: none;" fileinput="file" filepreview="filepreview" nv-file-select uploader="uploader" />
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- STATUS_TYPE.SUBMIT_OR_CANCEL -->
       <div ng-show="uploader.queue[0] != undefined && uploader.queue[0].isUploading == false && uploader.queue[0].isUploaded == false" class="form-group">
-        <button type="button" class="btn btn-default pull-left" ng-click="performAction('submit')">Submit</button>
-        <button type="button" class="btn btn-danger pull-right" ng-click="performAction('cancel')">Cancel</button>
+        <label>
+          <button type="button" class="btn btn-default pull-left" ng-click="performAction('submit')">Submit</button>
+        </label>
+        <label>
+          <button type="button" class="btn btn-danger pull-right" ng-click="performAction('cancel')">Cancel</button>
+        </label>
       </div>
+      <!-- STATUS_TYPE.UPLOADING -->
       <div ng-show="uploader.isHTML5 && uploader.queue[0].isUploading">
         <div class="progress" style="margin-bottom: 0;">
           <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.queue[0].progress + '%' }"></div>
         </div>
       </div>
+      <!-- STATUS_TYPE.UPLOADED -->
       <div ng-show="uploader.isHTML5 && uploader.queue[0].isUploaded" class="form-group">
-        <button type="button" class="btn btn-default pull-left" ng-click="performAction('save')">Save</button>
-        <button type="button" class="btn btn-danger pull-right" ng-click="performAction('cancel')">Cancel</button>
+        <label>
+          <button type="button" class="btn btn-default pull-left" ng-click="performAction('save')">Save</button>
+        </label>
+        <label>
+          <button type="button" class="btn btn-danger pull-right" ng-click="performAction('cancel')">Cancel</button>
+        </label>
       </div>
     </form>
   </div>

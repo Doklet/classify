@@ -12,7 +12,7 @@
 /* CSS talk bubble */
 
 .talk-bubble {
-  margin: 5px;
+  margin: 1px;
   display: inline-block;
   position: relative;
   width: auto;
@@ -20,13 +20,13 @@
 }
 
 .border {
-  border: 3px solid #666;
+  border: 1px solid #666;
 }
 
 .round {
-  border-radius: 10px;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
+  border-radius: 25px;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
 }
 
 
@@ -275,7 +275,10 @@
 /* talk bubble contents */
 
 .talktext {
-  padding: 1em;
+  padding-top: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 0px;
   text-align: left;
   line-height: 1.5em;
 }

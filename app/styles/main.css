@@ -36,6 +36,11 @@ body {
   border-top: 1px solid #e5e5e5;
 }
 
+/* http://stackoverflow.com/questions/24658365/img-tag-displays-wrong-orientation */
+img {
+    image-orientation: from-image;
+}
+
 /* Customize container */
 @media (min-width: 768px) {
   .container {

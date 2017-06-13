@@ -1,12 +1,14 @@
 'use strict';
 
 angular.module('classifyApp')
-  .controller('navigationCtrl', function($scope, $location) {
+  .controller('navigationCtrl', function($scope, $location, Client) {
 
     $scope.contains = function(viewLocation) {
       return $location.path().indexOf(viewLocation) !== -1;
     };
 
+    $scope.model = Client.getSelectedModel();
+    
   });
 
 angular.module('classifyApp')

@@ -21,6 +21,27 @@ angular.module('classifyApp')
       });
     };
 
+    $scope.processResponse = function(models) {
+
+      var results = [];
+
+      for (var i = 0; i < models.length; i++) {
+        var model = models[i];
+
+        for (var j = 0; j < model.labels.length; j++) {
+          var label = model.labels[j];
+          var result = {
+            name: label.label,
+            score: label.score,
+            model: model
+          };
+          results.push(result);
+        }
+      }
+
+      return results;
+    };
+
     $scope.processCommand = function(cmd) {
 
       var txt = cmd;
@@ -42,6 +63,7 @@ angular.module('classifyApp')
     };
 
     $scope.performAction = function(action) {
+
       switch (action) {
         case 'submit':
           uploader.queue[0].upload();
@@ -55,6 +77,7 @@ angular.module('classifyApp')
 
     uploader.onAfterAddingFile = function() {
       uploader.queue[0].upload();
+      console.info('onAfterAddingFile', uploader.queue.length);
     };
 
     uploader.onBeforeUploadItem = function(item) {
@@ -72,7 +95,9 @@ angular.module('classifyApp')
 
     uploader.onSuccessItem = function(fileItem, response, status, headers) {
       fileItem.response = response;
+      fileItem.results = $scope.processResponse(response);
       console.info('onSuccessItem', fileItem, response, status, headers);
+      console.info('results', fileItem.results);
     };
 
     uploader.onErrorItem = function(fileItem, response, status, headers) {

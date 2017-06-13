@@ -4,7 +4,7 @@
     <div class="page-header none-border-bottom">
       <div class="container">
         <div class="col-md-offset-2 col-md-8">
-          <h4>Models <span class="label label-info">{{models.length}}</span>
+          <h4>Modeller <span class="label label-info">{{models.length}}</span>
           </h4>
         </div>
       </div>
@@ -20,8 +20,13 @@
           <table class="table table-hover">
             <tr ng-repeat="model in models | orderBy:'name'">
               <td>
+                <div class="thumbnail">
+                  <img ng-src="{{model.thumb}}" class="img-responsive" width="200" height="200"/>
+                </div>
+              </td>
+              <td>
                 <dl>
-                  <dt><a ng-href="/#/?model={{model.id}}">{{model.name}}</a></dt>
+                  <dt><a ng-href="/#/?model={{model.id}}" ng-click="selected(model)">{{model.name}}</a></dt>
                   <dd>{{model.description}}</dd>
                 </dl>
               </td>

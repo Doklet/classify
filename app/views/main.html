@@ -6,17 +6,35 @@
       </button>
       {{error}}
     </div>
-    <h2 ng-show="uploader.queue[0]==undefined" class="text-center">Howdy!</h2>
+    <div ng-show="uploader.queue[0]==undefined">
+      <h2 class="text-center">Hej!</h2>
+      <p class="text-center">Ladda upp en bild</p>
+      <p class="text-center">eller byt <span><a href="#/models">model</a></span></p>
+    </div>
     <div class="container">
       <div class="row">
         <div ng-show="uploader.queue[0]">
           <div class="col-md-6 col-md-offset-3">
-            <div class="thumbnail no-padding">
+            <div class="thumbnail no-padding no-border">
               <img ng-src="{{filepreview}}" class="img-responsive" ng-show="filepreview" />
-              <div ng-show="uploader.queue[0].response" class="caption">
-                <p class="classify-label" ng-repeat="l in uploader.queue[0].response">
-                  <strong>{{l.label}}</strong> with a score of <strong>{{l.score * 100 | number:2}} </strong> %
-                </p>
+            </div>
+            <div ng-show="uploader.queue[0].response" class="caption">
+<!--               <div ng-repeat="model in uploader.queue[0].response" class="panel panel-default">
+                <div class="panel-body">
+                  <a>{{model.model}}</a>
+                  <p class="classify-label" ng-repeat="l in model.labels">
+                    <strong>{{l.label}}</strong> with a score of <strong>{{l.score * 100 | number:2}} </strong> %
+                  </p>
+                </div>
+              </div> -->
+              <div ng-repeat="result in uploader.queue[0].results" class="panel panel-default">
+                <div class="panel-body">
+                  <h4>{{result.name}}</h4>
+                  <a>{{result.model.model}}/{{result.name}} </a>
+                  <p class="classify-label">
+                    <small>{{result.score * 100 | number:2}} </small> %
+                  </p>
+                </div>
               </div>
             </div>
           </div>

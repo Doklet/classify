@@ -3,9 +3,6 @@
     <form class="navbar-form form-inline no-border">
       <!-- STATUS_TYPE.AWAIT_UPLOAD -->
       <div ng-show="uploader.queue[0]==undefined">
-        <!--         <div class="form-group">
-          <input type="text" class="form-control" ng-model="command" ng-keypress="($event.charCode==13)? processCommand(command) : return">
-        </div> -->
         <div class="container">
           <div class="row">
             <div class="col-md-offset-5 col-md-6 col-lg-offset-5 col-lg-6">
@@ -20,14 +17,14 @@
         </div>
       </div>
       <!-- STATUS_TYPE.SUBMIT_OR_CANCEL -->
-      <div ng-show="uploader.queue[0] != undefined && uploader.queue[0].isUploading == false && uploader.queue[0].isUploaded == false" class="form-group">
+      <!--       <div ng-show="uploader.queue[0] != undefined && uploader.queue[0].isUploading == false && uploader.queue[0].isUploaded == false" class="form-group">
         <label>
           <button type="button" class="btn btn-default pull-left" ng-click="performAction('submit')">Submit</button>
         </label>
         <label>
           <button type="button" class="btn btn-danger pull-right" ng-click="performAction('cancel')">Cancel</button>
         </label>
-      </div>
+      </div> -->
       <!-- STATUS_TYPE.UPLOADING -->
       <div ng-show="uploader.isHTML5 && uploader.queue[0].isUploading">
         <div class="progress" style="margin-bottom: 0;">
@@ -36,12 +33,17 @@
       </div>
       <!-- STATUS_TYPE.UPLOADED -->
       <div ng-show="uploader.isHTML5 && uploader.queue[0].isUploaded" class="form-group">
-        <label>
-          <button type="button" class="btn btn-default pull-left" ng-click="performAction('save')">Save</button>
-        </label>
-        <label>
-          <button type="button" class="btn btn-danger pull-right" ng-click="performAction('cancel')">Cancel</button>
-        </label>
+        <div class="container">
+          <div class="row">
+            <div class="col-md-offset-5 col-md-6 col-lg-offset-5 col-lg-6">
+              <div class="form-group">
+                <label>
+                  <button type="button" class="btn btn-default pull-right" ng-click="performAction('cancel')">Rensa</button>
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   </div>

@@ -3,26 +3,33 @@
 angular.module('classifyApp')
   .controller('ModelsCtrl', function($scope, Client) {
 
-    $scope.models = [{
-      id: undefined,
-      name: 'All models',
-      description: 'Use all the models'
-    }, {
-      id: 'imagenet',
-      name: 'Detect misced objects',
-      description: 'Detect a misced amount of object (good on cats and dogs)'
-    }, {
-      id: 'apple',
-      name: 'Detect anomalies on appels',
-      description: 'Separate good from bad apples'
-    }, {
-      id: 'flower',
-      name: 'Roses and tuplies',
-      description: 'Detect roses and tulips'
-    }];
+    $scope.models = [
+      // {
+      //   id: 'imagenet',
+      //   thumb: 'images/shafer.jpeg',
+      //   name: 'Hundar',
+      //   description: 'Detekterar olika hundraser'
+      // }, 
+      {
+        id: 'apple',
+        thumb: 'images/apple.jpg',
+        name: 'Defekta äpplen',
+        description: 'Skiljer bra från dåliga äpplen'
+      }, {
+        id: 'flower',
+        thumb: 'images/roses.jpg',
+        name: 'Blommor',
+        description: 'Detekterar rosor och tulpaner'
+      }, {
+        id: 'home',
+        thumb: 'images/home.jpg',
+        name: 'Situationer',
+        description: 'Detekterar olika situationer i hemmet'
+      }
+    ];
 
     $scope.selected = function(model) {
-      Client.setSelected(model);
+      Client.setSelectedModel(model);
     };
 
   });
